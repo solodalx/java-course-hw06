@@ -44,13 +44,13 @@ public class CountMapImpl <T> implements CountMap <T> {
             map.put(key, count + source.toMap().get(key));
         }
 
-        Set<Map.Entry<T, Integer>> set2 = source.toMap().entrySet();
-        for (Map.Entry<T, Integer> entry : set2) {
-            T key = entry.getKey();
-            Integer count = map.get(key);
-            if (count == null) count = 0;
-            map.put(key, count + entry.getValue());
-        }
+//        Set<Map.Entry<T, Integer>> set2 = source.toMap().entrySet();
+//        for (Map.Entry<T, Integer> entry : set2) {
+//            T key = entry.getKey();
+//            Integer count = map.get(key);
+//            if (count == null) count = 0;
+//            map.put(key, count + entry.getValue());
+//        }
     }
 
     @Override
