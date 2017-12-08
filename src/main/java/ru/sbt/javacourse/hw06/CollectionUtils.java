@@ -1,5 +1,6 @@
 package ru.sbt.javacourse.hw06;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -8,22 +9,28 @@ public class CollectionUtils {
         destination.addAll(source);
     }
 
-    public static List newArrayList() {
+    public static<T> List<T> newArrayList() {
+        return new ArrayList<T>();
     }
 
-    public static int indexOf(List source, Object o) {
+    public static<T> int indexOf(List<? extends T> source, Object o) {
+        return source.indexOf(o);
     }
 
-    public static List limit(List source, int size) {
+    public static<T> List<T> limit(List<T> source, int size) {
+        return source.subList(0, size);
     }
 
-    public static void add(List source, Object o) {
+    public static<T> void add(List<? super T> source, T o) {
+        source.add(o);
     }
 
-    public static void removeAll(List removeFrom, List c2) {
+    public static<T> void removeAll(List<? super T> removeFrom, List<? extends T> c2) {
+        removeFrom.removeAll(c2);
     }
 
-    public static boolean containsAll(List c1, List c2) {
+    public static<T> boolean containsAll(List<? super T> c1, List<? extends T> c2) {
+        return c1.containsAll(c2);
     }
 
     public static boolean containsAny(List c1, List c2) {
