@@ -59,7 +59,7 @@ public class CountMapImpl <T> implements CountMap <T> {
     }
 
     @Override
-    public void toMap(Map<T, Integer> destination) {
+    public void toMap(Map<? super T, Integer> destination) {
         destination.putAll(map);
     }
 }
