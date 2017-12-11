@@ -7,20 +7,23 @@ public class CollectionUtils {
         destination.addAll(source);
     }
 
-//    public static<T> List<T> newArrayList(T o) {
-//        return new ArrayList<T>();
-//    }
+    public static<T> List<T> newArrayList() {
+        return new ArrayList<T>();
+    }
 
     public static<T> int indexOf(List<? extends T> source, Object o) {
         return source.indexOf(o);
     }
 
-    public static<T> List<T> limit(List</*? extends */T> source, int size) {
-        List<T> result = source.subList(0, size);
-//        List<T> result = new ArrayList<T>();
-//        for (int i = 0; i < size && i < source.size(); i++) {
-//            result.add(source.get(i));
-//        }
+    public static<T> List<T> limit(List<? extends T> source, int size) {
+//        List<T> result = source.subList(0, size);
+        if (size > source.size())
+            throw new IndexOutOfBoundsException();
+
+        List<T> result = new ArrayList<T>();
+        for (int i = 0; i < size /*&& i < source.size()*/; i++) {
+            result.add(source.get(i));
+        }
         return result;
     }
 
@@ -55,7 +58,7 @@ public class CollectionUtils {
         return result;
     }
 
-    public static<T extends Comparable> List<T> range(List<? extends T> list, T min, T max, Comparator<T> comparator) {
+    public static<T> List<T> range(List<? extends T> list, T min, T max, Comparator<? super T> comparator) {
         List<T> result = new ArrayList<T>();
         for (T t: list) {
             if (comparator.compare(t, min) >= 0
@@ -63,7 +66,7 @@ public class CollectionUtils {
                 result.add(t);
             }
         }
-        Collections.sort(result);
+        Collections.sort(result, comparator);
         return result;
     }
 }

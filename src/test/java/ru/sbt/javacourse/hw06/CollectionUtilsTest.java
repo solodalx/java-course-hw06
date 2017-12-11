@@ -7,13 +7,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.*;
-import static ru.sbt.javacourse.hw06.CollectionUtils.addAll;
 
 public class CollectionUtilsTest {
     @Test
-    public void test01_addAllIndex() {
+    public void test01_newAddAllIndex() {
         List<Integer> source = Arrays.asList(1, 3, 5, 8);
-        List<Integer> dest = new ArrayList<Integer>();
+        List<Integer> dest = CollectionUtils.newArrayList();//new ArrayList<Integer>();
 
         CollectionUtils.addAll(source, dest);
         assertEquals(4, dest.size());
@@ -25,9 +24,9 @@ public class CollectionUtilsTest {
     }
 
     @Test
-    public void test02_addAllIndex2() {
+    public void test02_newAddAllIndex2() {
         List<Integer> source = Arrays.asList(1, 3, 5, 8);
-        List<Number> dest = new ArrayList<Number>();
+        List<Number> dest = CollectionUtils.newArrayList();//new ArrayList<Number>();
 
         CollectionUtils.addAll(source, dest);
         assertEquals(4, dest.size());
@@ -41,8 +40,8 @@ public class CollectionUtilsTest {
     @Test
     public void test02_limit() {
         List<Integer> source = Arrays.asList(1, 3, 5, 8);
-//        List<Number> dest;
-        List<Integer> dest;
+        List<Number> dest;
+//        List<Integer> dest;
 
         dest = CollectionUtils.limit(source, 3);
         assertEquals(3, dest.size());
@@ -146,11 +145,26 @@ public class CollectionUtilsTest {
         assertEquals(new Integer(3), rangedList.get(0));
         assertEquals(new Integer(5), rangedList.get(1));
 
-//        rangedList = null;
-//        rangedList = CollectionUtils.range(list, 2, 5, (c1, c2) -> {return c1.compareTo(c2);});
-//        rangedList = CollectionUtils.range(list, 2, 5, );
-//        assertEquals(2, rangedList.size());
-//        assertEquals(new Integer(3), rangedList.get(0));
-//        assertEquals(new Integer(5), rangedList.get(1));
+        rangedList = null;
+        rangedList = CollectionUtils.range(list, 2, 5, (c1, c2) -> c1.compareTo(c2));
+        assertEquals(2, rangedList.size());
+        assertEquals(new Integer(3), rangedList.get(0));
+        assertEquals(new Integer(5), rangedList.get(1));
+    }
+
+    @Test
+    public void test10_range2() {
+        List<Integer> list = new ArrayList<Integer>(Arrays.asList(1, 3, 5, 8));
+        List<Number> rangedList = null;
+
+        rangedList = CollectionUtils.range(list, 2, 5
+                , (Number c1, Number c2) -> {
+                    Double d1 = new Double(c1.doubleValue());
+                    Double d2 = new Double(c2.doubleValue());
+                    return d1.compareTo(d2);
+                });
+        assertEquals(2, rangedList.size());
+        assertEquals(new Integer(3), rangedList.get(0));
+        assertEquals(new Integer(5), rangedList.get(1));
     }
 }
